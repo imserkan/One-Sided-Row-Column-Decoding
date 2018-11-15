@@ -3,7 +3,7 @@ import pandas as pd
 pd.options.mode.chained_assignment = None
 import random
 
-class question5:
+class question6:
     def __init__(self, path_count, generatedInput, targetRange):
         self.path_count = path_count
         self.generatedInput = generatedInput
@@ -15,6 +15,8 @@ class question5:
         for i in range(self.path_count):
             for j in range(self.path_count - 1):
                 if i < j:
+                    array[i][j] = ' '
+                if i == j-1:
                     array[i][j] = 'x'
         self.paths = pd.DataFrame(columns=np.arange(0, self.path_count - 1), data=array)
         return self.paths
@@ -49,7 +51,7 @@ class question5:
                         for k in range(0, encounterPoint):
                             self.paths[k][encounterPoint] += '>'
                         for k in range(encounterPoint, endPoint+1):
-                            self.paths[encounterPoint][k] += '.'
+                            self.paths[encounterPoint][k] += 'v'
                         for k in range(0, encounterPoint):
                             self.paths[k][endPoint] += '<'
                     if randomInputs[i] > randomOutputs[i][j]:
@@ -70,7 +72,7 @@ class question5:
 
 
 if __name__ == "__main__":
-    q = question5(path_count=16, generatedInput=3, targetRange=4)
+    q = question6(path_count=16, generatedInput=3, targetRange=4)
     path = q.createPaths()
     randomInputs, randomOutputs = q.generateMulticastInputs()
     generatedPath = q.extendedOneSidedMeshAlgorithm(randomInputs=randomInputs, randomOutputs=randomOutputs)
